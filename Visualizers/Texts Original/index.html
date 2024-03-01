@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Hand Midi</title>
+</head>
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../libraries/three.module.js"
+            }
+        }
+    </script>
+
+    <div class="content">
+        <!-- The canvas where ThreeJs renders the WebGL -->
+        <canvas id="scene"></canvas>
+        
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/kripken/ammo.js@HEAD/builds/ammo.wasm.js"></script> -->
+    <script src="../libraries/ammo.wasm.js"></script>
+    <!-- <script src="https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/jsm/libs/ammo.wasm.js"></script> -->
+    <!-- <script type="module" src="texts.js"></script> -->
+    <script type="module" src="test.js"></script>
+    <!-- <script type="module" src="testSoft.js"></script> -->
+    <!-- <script type="module" src="rigidCalvin.js"></script> -->
+    <script src="midi.js"></script>
+</body>
+</html>

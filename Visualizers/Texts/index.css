@@ -1,0 +1,20 @@
+html, body {
+    margin: 0;
+    cursor: none;
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+canvas {
+    position: absolute;
+    top:  0;
+    left: 0;
+}

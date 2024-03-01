@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live MIDI</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        main {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+            text-align: center;
+            /* font-size: 2rem; */
+            padding: 1rem;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live MIDI Configurator</h1>
+    <main>
+        <span id="MIDIMessage"></span>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "../Visualizers/libraries/three.module.js",
+                    "GLTFLoader": "../Visualizers/libraries/GLTFLoader.js"
+                }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/kripken/ammo.js@HEAD/builds/ammo.wasm.js"></script>
+        <script type="module" src="./index.js"></script>
+        <!-- <script type="module" src="./eventHandler.js"></script> -->
+    </main>
+</body>
+</html>
