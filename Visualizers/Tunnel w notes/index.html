@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./tunnel.css">
+    <title>Tunnel</title>
+    <script
+    src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0">
+</script>
+</head>
+å
+<body>
+    <main>
+        <midi-player src="./guitar.mid"
+        id="mainPlayer">
+    </midi-player>
+        <div class="content">
+            <!-- The canvas where ThreeJs renders the WebGL -->
+            <canvas id="scene"></canvas>
+            <!-- <video id="playVid" autoplay muted>
+                <source src="../assets/1024.mp4" type="video/mp4">
+            </video> -->
+        </div>
+    </main>
+    <!-- <script src="../libraries/three.min.js"></script> -->
+    <script type="importmap">
+        {
+        "imports": {
+            "three": "../libraries/three.module.js"
+        }
+    }
+</script>
+    <script type="module" src="Tunnel.js"></script>
+    <script src="midi.js"></script>
+    <script>
+
+window.addEventListener('DOMContentLoaded', function () {
+
+for (const player of document.querySelectorAll('midi-player')) {
+    player.addEventListener('note', (note) => {
+      const midiMessage = note.detail.note;
+      getMIDIMessage({data: [midiMessage.instrument+144, midiMessage.pitch, midiMessage.velocity]})
+    });
+}
+});
+                async function playSong(e) {
+            // console.log("hello");
+            // console.log(e.target.dataset.filename);
+            // const midiFile = await fetch(`./midi/${e.target.dataset.filename}`).then((response) => {
+            //     return response.blob();
+            // })
+            // console.log(midiFile);
+            //     window.core.blobToNoteSequence(midiFile).then((seq) => {
+                    const player = document.getElementById('mainPlayer')
+                    // const modal = document.getElementById('dialog');
+                    // const logo = document.getElementById('logoCenter');
+
+                    // player.noteSequence = seq;
+                    // modal.classList.add('close');
+                    // logo.classList.add('show');
+
+                    // setTimeout(() => {
+                    //     // modal.close()
+                    //     logo.classList.remove('show');
+                    //     player.start();
+                    // }, 3000);
+                // }).catch((reason) => {
+                //     alert('Failed to load MIDI file.');
+                //     console.error(reason);
+                player.start()
+                };
+            
+
+            window.addEventListener('keydown', e => {
+                if (e.key = " ") {
+                    playSong()
+                }
+            })
+    </script>
+</body>
+
+</html>

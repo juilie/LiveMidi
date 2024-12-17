@@ -15,6 +15,7 @@ import {
 const DEFAULT_MASS = 10;
 
 let spinning = false;
+let objects = []
 window.addEventListener("keydown", (e) => {
   if (e.key === "s") {
     spinning = !spinning;
@@ -234,6 +235,10 @@ class BasicWorldDemo {
   }
 
   raf_() {
+    if (this.rigidBodies_.length > 100){
+      this.rigidBodies_ = this.rigidBodies_.slice(1)
+      this.scene_.remove(this.rigidBodies_[0].mesh)
+    }
     requestAnimationFrame((t) => {
       if (this.previousRAF_ === null) {
         this.previousRAF_ = t;
@@ -286,13 +291,13 @@ class BasicWorldDemo {
         break;
 
       default:
-        const torus = new THREE.TorusKnotGeometry(scale, scale, scale, 16);
+        const torus = new THREE.TorusKnotGeometry(scale * 0.5, scale * 0.5, scale * 0.5, 16);
         const torusMaterial = new THREE.MeshPhysicalMaterial({
           color: 0xff00ff,
           roughness: 0.0,
           ior: 2,
           reflectivity: 1.0,
-          // wireframe: true
+          wireframe: true
           // flatShading: true,
           // metalness: 0.5
         });
@@ -381,10 +386,10 @@ class BasicWorldDemo {
   step_(timeElapsed) {
     const timeElapsedS = timeElapsed * 0.001;
 
-    if (this.rigidBodies_.length >= 100) {
-      this.rigidBodies_ = this.rigidBodies_.slice(1)
-      console.log(this.rigidBodies_.length);
-    }
+    // if (this.rigidBodies_.length >= 100) {
+    //   this.rigidBodies_ = this.rigidBodies_.slice(1)
+    //   console.log(this.rigidBodies_.length);
+    // }
     this.physicsWorld_.stepSimulation(timeElapsedS, 10);
 
     for (let i = 0; i < this.rigidBodies_.length; ++i) {

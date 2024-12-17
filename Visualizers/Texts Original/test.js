@@ -103,7 +103,7 @@ class BasicWorldDemo {
 
     this.scene_ = new THREE.Scene();
 
-    let light = new THREE.DirectionalLight(0xFFFFFF, 1.0);
+    let light = new THREE.DirectionalLight(0xFFFFFF, 10.0);
     light.position.set(20, 100, 10);
     light.target.position.set(0, 0, 0);
     light.castShadow = true;
@@ -277,8 +277,9 @@ class BasicWorldDemo {
         bevelSegments: 5
     } );
 
+    let randColor = new THREE.Color(0xffffff * Math.random());
     const mesh = new THREE.MeshPhysicalMaterial({
-        color: "#00ff00",
+        color: randColor,
         roughness: 0,
         flatShading: false
     })

@@ -2,7 +2,7 @@ const img = document.getElementById("ctLogo");
 console.log(img);
 
 function circle(ctx, note, velocity) {
-    const normalizedNote = normalize(59, 74, note) * innerWidth
+    const normalizedNote = normalize(22, 88, note) * innerWidth
     const normalizedVelocity = normalize(velocity)
     console.log(normalizedNote);
     ctx.beginPath();
@@ -20,7 +20,7 @@ function bounce(width, height, color, x, y, type) {
     this.type = type;
     this.width = width;
     this.height = height;
-    this.x = normalize(11, 121, x) * innerWidth;
+    this.x = normalize(52, 88, x) * innerWidth;
     this.y = y;    
     this.speedX = 0;
     this.speedY = 0;    

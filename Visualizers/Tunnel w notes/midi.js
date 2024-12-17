@@ -20,13 +20,22 @@ function onMIDIFailure() {
     console.log('Could not access your MIDI devices.');
 }
 
+function midiNumToNoteName(midiNum) {
+    const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const octave = Math.floor(midiNum / 12) - 1;
+    const noteIndex = midiNum % 12;
+    return noteNames[noteIndex] + octave;
+}
+
 function getMIDIMessage(midiMessage) {
     velocity = midiMessage.data[2];
     note = midiMessage.data[1];
     statusByte = midiMessage.data[0];
-    console.log(statusByte, note, velocity);
+    
+    if (statusByte >= 144 && statusByte <= 159 && statusByte !== 254 && velocity !== 0) {
+        console.log(statusByte, note, velocity);
+        window.tunnel.addNoteName(midiNumToNoteName(note))
 
-    if (statusByte >= 144 && statusByte <= 159 && statusByte !== 254) {
         if(statusByte === 150) {
             let town = ""
             switch (note) {

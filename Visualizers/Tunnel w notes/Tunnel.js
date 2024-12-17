@@ -1,5 +1,8 @@
 import * as THREE from 'three';
-
+import {
+	TextGeometry
+} from 'https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/geometries/TextGeometry.js'
+import {FontLoader} from "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/loaders/FontLoader.js"
 // import {
 //   RoomEnvironment
 // } from 'three/addons/environments/RoomEnvironment.js';
@@ -21,6 +24,13 @@ function Tunnel() {
 
   // Mouse events & window resize
   this.handleEvents();
+
+  const fontloader = new FontLoader();
+  fontloader.load( './helvetiker.json', function ( font ) {
+    console.log(font);
+      window.loadedFont = font
+  })
+
 
   // Start loop animation
   window.requestAnimationFrame(this.render.bind(this));
@@ -120,9 +130,11 @@ Tunnel.prototype.createMesh = function () {
   this.tubeMaterial.bumpMap.repeat.set(30, 6);
 
   // Create a tube geometry based on the curve
-  this.tubeGeometry = new THREE.TubeGeometry(this.curve, 70, 0.02, 50, false);
+  this.tubeGeometry = new THREE.TubeGeometry(this.curve, 70, 0.04, 50, true);
   // Create a mesh based on the tube geometry and its material
   this.tubeMesh = new THREE.Mesh(this.tubeGeometry, this.tubeMaterial);
+
+  console.log(this.tubeMesh);
   // Push the tube into the scene
   this.scene.add(this.tubeMesh);
 
@@ -158,7 +170,7 @@ Tunnel.prototype.addShape = function () {
   // const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
   sphere.position.z = 0.55
   // sphere.position.z =  Math.random() * 0.1 + 0.5
-  sphere.position.y = (Math.random() - .5) * 0.025
+  sphere.position.y = (Math.random() - .5) * 0.025 + .02
   sphere.position.x = (Math.random() - .5) * 0.025
 
   this.shapes.push(sphere)
@@ -190,7 +202,7 @@ Tunnel.prototype.addCone = function () {
   // cone.rotation.z = Math.random()
   // cone.rotateZ = Math.random()
   // cone.position.z =  Math.random() * 0.1 + 0.5
-  cone.position.y = (Math.random() - .5) * 0.04
+  cone.position.y = (Math.random() - .5) * 0.04 + .02
   cone.position.x = (Math.random() - .5) * 0.04 +.02
 
   this.shapes.push(cone)
@@ -223,7 +235,7 @@ Tunnel.prototype.addTorus = function () {
   // torus.rotation.z = Math.random()
   // torus.rotateZ = Math.random()
   // torus.position.z =  Math.random() * 0.1 + 0.5
-  torus.position.y = (Math.random() - .5) * 0.04
+  torus.position.y = (Math.random() - .5) * 0.04 + .02
   torus.position.x = (Math.random() - .5) * 0.04 +.02
 
   this.shapes.push(torus)
@@ -255,7 +267,7 @@ Tunnel.prototype.addOcta = function () {
   // octahedron.rotation.z = Math.random()
   // octahedron.rotateZ = Math.random()
   // octahedron.position.z =  Math.random() * 0.1 + 0.5
-  octahedron.position.y = (Math.random() - .5) * 0.04
+  octahedron.position.y = (Math.random() - .5) * 0.04 + .02
   octahedron.position.x = (Math.random() - .5) * 0.04 +.02
 
   this.shapes.push(octahedron)
@@ -281,7 +293,7 @@ Tunnel.prototype.addCube = function () {
   cube.position.z = 0.55
   // cube.rotateX = Math.random()
   cube.rotation.x = (Math.random() - 0.5) * 2
-  cube.rotation.y = (Math.random() - 0.5) * 2
+  cube.rotation.y = (Math.random() - 0.5) * 2 + .02
   cube.rotation.z = (Math.random() - 0.5) * 2
   // cube.rotation.y = Math.random()
   // cube.rotation.z = Math.random()
@@ -292,6 +304,37 @@ Tunnel.prototype.addCube = function () {
 
   this.shapes.push(cube)
   this.scene.add(cube);
+}
+
+Tunnel.prototype.addNoteName = function (message) {
+  const textGeo = new TextGeometry(message, {
+    font: window.loadedFont,
+    size: .01,
+    height: .01,
+    curveSegments: 12,
+    bevelEnabled: false,
+    bevelThickness: .5,
+    bevelSize: .005,
+    bevelOffset: 0,
+    bevelSegments: 5
+} );
+
+let randColor = new THREE.Color(0xffffff * Math.random());
+const mesh = new THREE.MeshPhysicalMaterial({
+    color: randColor,
+    roughness: 0,
+    flatShading: false
+})
+const text = new THREE.Mesh(textGeo, mesh)
+text.rotation.y = Math.PI
+// text.rotation.z = Math.PI/2
+text.position.y = (Math.random() - .5) * 0.1 + .02
+text.position.x = (Math.random() - .5) * 0.1+.02
+text.position.z = 0.55
+
+this.shapes.push(text)
+this.scene.add(text)
+
 }
 Tunnel.prototype.addRing = function () {
   const size = Math.abs(Math.random() - .5) * .008
@@ -319,7 +362,7 @@ Tunnel.prototype.addRing = function () {
   // cone.rotation.z = Math.random()
   // cone.rotateZ = Math.random()
   // cone.position.z =  Math.random() * 0.1 + 0.5
-  cone.position.y = (Math.random() - .5) * 0.04
+  cone.position.y = (Math.random() - .5) * 0.04 + .02
   cone.position.x = (Math.random() - .5) * 0.04 +.02
 
   this.shapes.push(cone)
@@ -499,3 +542,6 @@ function checkTextures() {
 // })
 
 // video.play()
+window.addEventListener("click", ()=> {
+  window.tunnel.addNoteName("A4")
+})

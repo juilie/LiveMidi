@@ -36,7 +36,7 @@ function getMIDIMessage(midiMessage) {
     if (statusByte >= 144 && statusByte <= 159 && statusByte !== 254) {
         console.log(statusByte, note, velocity);
         var color = statusByte == 153 ? "pink" : "blue"
-        test.push(new bounce(30, 40, color, note, 0))
+        test.push(new bounce(50, 70, color, note, 0))
     }
 }
 

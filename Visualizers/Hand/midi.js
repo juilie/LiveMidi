@@ -40,11 +40,11 @@ function getMIDIMessage(midiMessage) {
                     window.world.spawn_("cone")
                     break;
                 case 147:
-                    window.world.changeBackground()
-                    window.world.spawn_("")
+                    // window.world.changeBackground()
+                    window.world.spawn_("cone")
                     break;
                 case 148:
-                window.world.spawn_("cone")
+                window.world.spawn_("")
                     break;
                 case 149:
                     window.world.spawn_("")
